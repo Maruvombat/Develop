@@ -56,6 +56,8 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
 
   monolit-service:
+    volumes:
+      - /home/marina/Develop/monolit-sertvice:/app
     container_name: ${PROJECT_NAME}-monolit-service
     build:
       context: monolit-service
@@ -72,6 +74,7 @@ services:
       - rabbitmq
       - database
 
+
   # Нужен для общения с сервисами через HTTP протокол.
   web-service: 
     container_name: ${PROJECT_NAME}-web-service
@@ -87,3 +90,5 @@ services:
       WAIT_HOSTS: ${PROJECT_NAME}-rabbitmq:5672
     depends_on:
       - rabbitmq
+      
+    #  CMD 
